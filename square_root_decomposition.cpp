@@ -37,10 +37,10 @@ void solve(){
         
         // traverse l -> r by taking already calculated sum of block array
         
-        for(int i = l; i <= r; i++){
+        for(int i = l; i <= r;){
             if( (i%len == 0) && (i + len -1 <= r)){
                 sum += block[i/len];
-                i += len;
+                i += len; 
             }else{
                 sum += arr[i];
                 i++;
@@ -55,11 +55,3 @@ void solve(){
 int main(){
     solve();
 }
-
-
-
-
-
-
-
-
