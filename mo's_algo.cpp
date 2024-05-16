@@ -25,14 +25,14 @@ public:
 
     void query() {
         int querySize;
-        std::cin >> querySize;
+        cin >> querySize;
 
         int l, r, i = 0;
         Query q[querySize];
 
         // Input all the queries (1-based indexing)
         while (i < querySize) {
-            std::cin >> l >> r;
+            cin >> l >> r;
             l--;
             r--; // Adjust for 0-based indexing
 
@@ -44,42 +44,42 @@ public:
         }
 
         // Sort the queries
-        std::sort(q, q + querySize, compare);
+        sort(q, q + querySize, compare);
 
         // Initialize result array and pointers
-        std::vector<int> ans(querySize);
-        int currL = 0, currR = -1, currAns = 0;
+        vector<int> ans(querySize);
+        int curr_left = 0, curr_right = -1, curr_ans = 0;
 
         for (int i = 0; i < querySize; i++) {
             l = q[i].l;
             r = q[i].r;
 
             // Add elements to current range
-            while (currL > l) {
-                currL--;
-                currAns += arr[currL];
+            while (curr_ans > l) {
+                curr_left--;
+                curr_ans += arr[curr_left];
             }
-            while (currR < r) {
-                currR++;
-                currAns += arr[currR];
+            while (curr_right < r) {
+                curr_right++;
+                curr_ans += arr[curr_right];
             }
 
             // Remove elements from previous range
-            while (currL < l) {
-                currAns -= arr[currL];
-                currL++;
+            while (curr_left < l) {
+                curr_ans -= arr[curr_left];
+                curr_left++;
             }
-            while (currR > r) {
-                currAns -= arr[currR];
-                currR--;
+            while (curr_right > r) {
+                curr_ans -= arr[curr_right];
+                curr_right--;
             }
 
-            ans[q[i].idx] = currAns;
+            ans[q[i].idx] = curr_ans;
         }
 
         // Output query results
         for (int i = 0; i < querySize; i++) {
-            std::cout << "Sum of " << q[i].l + 1 << " to " << q[i].r + 1 << " -> " << ans[i] << std::endl;
+            cout << "Sum of " << q[i].l + 1 << " to " << q[i].r + 1 << " -> " << ans[i] << std::endl;
         }
     }
 };
